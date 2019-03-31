@@ -183,7 +183,47 @@ namespace xt
 
         CT m_e;
         inner_shape_type m_shape;
+
+        template <class CCT, class CX>
+        friend constexpr auto detail::linear_begin(xbroadcast<CCT, CX>&) noexcept;
+        template <class CCT, class CX>
+        friend constexpr auto detail::linear_end(xbroadcast<CCT, CX>&) noexcept;
+        template <class CCT, class CX>
+        friend constexpr auto detail::linear_begin(const xbroadcast<CCT, CX>&) noexcept;
+        template <class CCT, class CX>
+        friend constexpr auto detail::linear_end(const xbroadcast<CCT, CX>&) noexcept;
     };
+
+    /*****************************
+     * linear_begin / linear_end *
+     *****************************/
+
+    namespace detail
+    {
+        template <class CT, class X>
+        constexpr auto linear_begin(xbroadcast<CT, X>& c) noexcept
+        {
+            return linear_begin(c.m_e);
+        }
+
+        template <class CT, class X>
+        constexpr auto linear_end(xbroadcast<CT, X>& c) noexcept
+        {
+            return linear_end(c.m_e);
+        }
+
+        template <class CT, class X>
+        constexpr auto linear_begin(const xbroadcast<CT, X>& c) noexcept
+        {
+            return linear_begin(c.m_e);
+        }
+
+        template <class CT, class X>
+        constexpr auto linear_end(const xbroadcast<CT, X>& c) noexcept
+        {
+            return linear_end(c.m_e);
+        }
+    }
 
     /****************************
      * broadcast implementation *
